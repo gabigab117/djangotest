@@ -21,3 +21,4 @@ def test_signup(client: Client):
     user = User.objects.get(email=VALID_DATA["email"])
     assert response.status_code == 302
     assert user.is_active is False
+    
