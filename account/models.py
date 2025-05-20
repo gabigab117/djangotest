@@ -34,14 +34,15 @@ class Address(models.Model):
 
 
 class Claim(models.Model):
+    
     class ClaimStatus(models.TextChoices):
         PENDING = "pending", "En attente"
         RESOLVED = "resolved", "Résolu"
+        
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Utilisateur", related_name="claims")
     status = models.CharField(max_length=50, choices=ClaimStatus, default=ClaimStatus.PENDING, verbose_name="Statut de la réclamation")
     description = models.TextField(verbose_name="Description")
     date_submitted = models.DateTimeField(auto_now_add=True, verbose_name="Date de soumission")
-    status = models.CharField(max_length=50, choices=[("pending", "En attente"), ("resolved", "Résolu")], default="pending", verbose_name="Statut")
 
     class Meta:
         verbose_name = "Réclamation"

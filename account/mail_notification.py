@@ -7,8 +7,7 @@ def user_notification_claim_status_change(claim):
     Notifies the user about the status change of their claim.
     """
     subject = f"Changement de statut de votre réclamation"
-    message = f"Le statut de votre réclamation a été mis à jour.\n\nStatut: {claim.get_status_display()}" \
-              f"\n\nDate de mise à jour: {claim.date_submitted}"
+    message = f"Le statut de votre réclamation a été mis à jour.\n\nStatut: {claim.get_status_display()}"
     send_mail(subject, message, from_email=None, recipient_list=[claim.user.email], fail_silently=True)
 
 
