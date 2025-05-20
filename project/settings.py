@@ -131,4 +131,4 @@ MEDIA_ROOT = BASE_DIR / "mediafiles"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MAX_ADDRESSES = 5  # Maximum number of addresses allowed per user
+MAX_ADDRESSES = 2  # Maximum number of addresses allowed per user
