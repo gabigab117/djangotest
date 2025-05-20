@@ -48,7 +48,7 @@ class Claim(models.Model):
         verbose_name_plural = "Réclamations"
 
     def __str__(self):
-        return f"{self.claim_type} - {self.user.username}"
+        return f"{self.status} - {self.user.username}"
     
     def set_to_resolved(self):
         self.status = self.ClaimStatus.RESOLVED
