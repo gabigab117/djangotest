@@ -31,3 +31,25 @@ class Address(models.Model):
             self.default = True
             
         super().save(*args, **kwargs)
+
+
+class Claim(models.Model):
+    class ClaimStatus(models.TextChoices):
+        PENDING = "pending", "En attente"
+        RESOLVED = "resolved", "Résolu"
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Utilisateur", related_name="claims")
+    status = models.CharField(max_length=50, choices=ClaimStatus, default=ClaimStatus.PENDING, verbose_name="Statut de la réclamation")
+    description = models.TextField(verbose_name="Description")
+    date_submitted = models.DateTimeField(auto_now_add=True, verbose_name="Date de soumission")
+    status = models.CharField(max_length=50, choices=[("pending", "En attente"), ("resolved", "Résolu")], default="pending", verbose_name="Statut")
+
+    class Meta:
+        verbose_name = "Réclamation"
+        verbose_name_plural = "Réclamations"
+
+    def __str__(self):
+        return f"{self.claim_type} - {self.user.username}"
+    
+    def set_to_resolved(self):
+        self.status = self.ClaimStatus.RESOLVED
+        self.save()
