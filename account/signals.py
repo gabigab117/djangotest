@@ -9,21 +9,21 @@ User = get_user_model()
 
 
 @receiver(post_save, sender='account.Claim')
-def notify_managers(sender, instance, created, **kwargs):
-    """
-    Notifies managers about a new claim.
-    """
-    if created:
-        mail_notification.manager_notification_new_claim(instance)
-
-
-@receiver(post_save, sender='account.Claim')
 def notify_user(sender, instance, created, **kwargs):
     """
     Notifies the user about the status change of their claim.
     """
     if not created:
         mail_notification.user_notification_claim_status_change(instance)
+
+
+@receiver(post_save, sender='account.Claim')
+def notify_managers(sender, instance, created, **kwargs):
+    """
+    Notifies managers about a new claim.
+    """
+    if created:
+        mail_notification.manager_notification_new_claim(instance)
 
 
 @receiver(post_save, sender=User)
